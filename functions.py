@@ -66,3 +66,45 @@ def huffman_tree(text):
     root = nodes_list[0]
 
     return root
+
+
+def is_leaf(node):
+    """
+    check if node is leaf
+    :param node:
+    :return: bool
+    """
+    if node.left is not None or node.right is not None:
+        return False
+    return True
+
+
+def code_generator(tree_node, stored='', counter=0, codes_dict={}):
+    """
+    calculate code for huffman tree leaves(single chars) recursively
+    :param counter: to solve shallow copy problem in dict()
+    :param tree_node:
+    :param stored:
+    :param codes_dict:
+    :return: codes_dict
+    """
+    # check if it's first time this function call then empty codes_dict
+    if counter == 0:
+        codes_dict.clear()
+    counter += 1
+
+    # make code for each leaf(append while iterate and pass branches)
+    code = stored + tree_node.code
+
+    # add leaf code to codes_dict
+    if is_leaf(tree_node):
+        codes_dict[tree_node.data] = code
+
+    # go to leaf and make leaf code
+    if tree_node.left:
+        code_generator(tree_node.left, code, counter=counter)
+    if tree_node.right:
+        code_generator(tree_node.right, code, counter=counter)
+
+    return codes_dict
+
