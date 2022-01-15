@@ -108,3 +108,21 @@ def code_generator(tree_node, stored='', counter=0, codes_dict={}):
 
     return codes_dict
 
+
+def encode(text, codes_dict):
+    """
+    huffman encoding
+    :param codes_dict:
+    :param text:
+    :return:
+    """
+    # init result list
+    res = []
+
+    # append each code of each char in text to result list
+    for i in text:
+        res.append(codes_dict[i])
+
+    # cast res to string and return
+    return ''.join(res)
+
