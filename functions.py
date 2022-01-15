@@ -154,3 +154,21 @@ def decode(encoded, tree_node):
 
     # cast res to string and return
     return ''.join(res)
+
+
+def is_efficient(text, codes_dict):
+    """
+    check if it's efficient to compress
+    :param text:
+    :param codes_dict:
+    :return:
+    """
+    # calculate space usage of plain text
+    before = len(text) * 8
+
+    # calculate space usage after encoding
+    after = 0
+    for char in codes_dict:
+        after += len(codes_dict[char]) * text.count(char)
+
+    return True if after < before else False
