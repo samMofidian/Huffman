@@ -126,3 +126,31 @@ def encode(text, codes_dict):
     # cast res to string and return
     return ''.join(res)
 
+
+def decode(encoded, tree_node):
+    """
+    decode encoded text by huffman tree
+    :param encoded:
+    :param tree_node:
+    :return:
+    """
+    # store tree root
+    root = tree_node
+
+    # init result list
+    res = []
+
+    for i in encoded:
+        # if i is 0 go to left else go to right
+        if i == '0':
+            tree_node = tree_node.left
+        else:
+            tree_node = tree_node.right
+
+        # if leaf touched then append leaf data to result list and set tree_node to root(start over)
+        if is_leaf(tree_node):
+            res.append(tree_node.data)
+            tree_node = root
+
+    # cast res to string and return
+    return ''.join(res)
