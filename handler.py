@@ -19,6 +19,29 @@ def start():
         return start()
 
 
+def do_encode(text, codes_dict):
+    """
+    check encoding efficiency
+    :param text:
+    :param codes_dict:
+    :return:
+    """
+    # if it's efficient continue
+    if is_efficient(text, codes_dict):
+        return
+
+    # user decision to continue encoding with the fact that it isn't efficient
+    user_respond = input("encoding is not efficient in compressing. do you still want to encode?(y/n): ")
+    if user_respond == 'y':
+        return
+    elif user_respond == 'n':
+        return run()
+    else:
+        # call recursive to receive valid input(y/n)
+        print('Invalid Input')
+        return do_encode()
+
+
 def run():
     """
     factory
@@ -37,6 +60,7 @@ def run():
     codes = code_generator(tree)
 
     # encode
+    do_encode(text, codes)
     encoded_text = encode(text, codes)
     print('encoding result:', encoded_text)
 
