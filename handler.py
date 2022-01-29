@@ -1,5 +1,5 @@
 import sys
-from functions import huffman_tree, encode, decode, code_generator, is_efficient
+from functions import huffman_tree, huffman_tree_using_list, encode, decode, code_generator, is_efficient, chars_counts_2d_list
 
 
 def start():
@@ -53,11 +53,18 @@ def run():
     # receive text
     text = input("please input your text:\n")
 
+    # create 2d-list
+    # chars_counts_list = chars_counts_2d_list(text)
+
+    # create tree using 2d-list
+    # tree_with_list = huffman_tree_using_list(chars_counts_list)
+
     # create huffman tree
     tree = huffman_tree(text)
 
     # create code dictionary from huffman tree
     codes = code_generator(tree)
+    # codes_using_tree_with_list = code_generator(tree_with_list)
 
     # encode
     do_encode(text, codes)
