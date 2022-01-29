@@ -119,7 +119,8 @@ def huffman_tree_using_list(chars_counts_list):
     # do while there is at least 2 elements in list
     while len(nodes_list) >= 2:
         # sort nodes_list by count
-        nodes_list = sorted(nodes_list, key=lambda node: node.count)
+        # nodes_list = sorted(nodes_list, key=lambda node: node.count)
+        bubble_sort(nodes_list)
 
         # make combined node of two smallest node
         left = nodes_list[0]
@@ -247,3 +248,39 @@ def is_efficient(text, codes_dict):
         after += len(codes_dict[char]) * text.count(char)
 
     return True if after < before else False
+
+
+def bubble_sort(lst):
+    """
+    bubble sort use in huffman_tree function to sort list based on repetition-count in dictionary
+    :param lst:
+    :return:
+    """
+    for i in range(len(lst)):
+        # check if sorted or not
+        has_changed = False
+
+        for j in range(len(lst)-i-1):
+            # compare count
+            if lst[j].count >= lst[j+1].count:
+                # swap
+                temp = lst[j]
+                lst[j] = lst[j+1]
+                lst[j+1] = temp
+
+                # changed and not sorted
+                has_changed = True
+
+            # # if count were equal base on alphabetic
+            # elif lst[j].count == lst[j+1].count and str(lst[j]) < str(lst[j+1]):
+            #     # swap
+            #     temp = lst[j]
+            #     lst[j] = lst[j+1]
+            #     lst[j+1] = temp
+            #
+            #     # changed and not sorted
+            #     has_changed = True
+
+        # hasn't  changed and sorted
+        if not has_changed:
+            break
