@@ -23,6 +23,33 @@ def chars_count_dict(text):
     return chars_dict
 
 
+def chars_counts_2d_list(text):
+    """
+    receive text as string and make 2d-list of words in the text and their repetition
+    :param text:
+    :return: created 2d-list
+    """
+    # cast text to list of chars
+    text_chars_list = list(text)
+
+    # distinct elements
+    set_of_chars = set(text_chars_list)
+
+    # init 2d list
+    chars_counts_list = [[""]*len(set_of_chars), [1]*len(set_of_chars)]
+
+    # iterator
+    i = 0
+
+    # make 2d-list(top-side char | down-side count)
+    for j in set_of_chars:
+        chars_counts_list[0][i] = j
+        chars_counts_list[1][i] = text_chars_list.count(j)
+        i += 1
+
+    return chars_counts_list
+
+
 def huffman_tree(text):
     """
     create huffman tree
