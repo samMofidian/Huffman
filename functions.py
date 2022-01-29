@@ -95,6 +95,54 @@ def huffman_tree(text):
     return root
 
 
+def huffman_tree_using_list(chars_counts_list):
+    """
+    create huffman tree using 2d-list
+    :param chars_counts_list:
+    :return: tree root
+    """
+    # init nodes list
+    nodes_list = []
+
+    # create chars-list
+    chars_list = [i for i in chars_counts_list[0]]
+
+    # create count-list
+    counts_list = [i for i in chars_counts_list[1]]
+
+    # add node to nodes_list (from 2d-list)
+    for i in range(len(chars_list)):
+        # make node for each char
+        char_node = Node(data=chars_list[i], count=counts_list[i])
+        nodes_list.append(char_node)
+
+    # do while there is at least 2 elements in list
+    while len(nodes_list) >= 2:
+        # sort nodes_list by count
+        nodes_list = sorted(nodes_list, key=lambda node: node.count)
+
+        # make combined node of two smallest node
+        left = nodes_list[0]
+        right = nodes_list[1]
+        data = str(left) + str(right)
+        count = left.count + right.count
+        combined = Node(data, count, left, right)
+
+        # relate 0 for left branches and 1 for right branches(use in code)
+        left.code = '0'
+        right.code = '1'
+
+        # replace combined with two nodes made it
+        nodes_list.remove(nodes_list[1])
+        nodes_list.remove(nodes_list[0])
+        nodes_list.append(combined)
+
+    # when loop finished there is only one element in nodes_list(tree root)
+    root = nodes_list[0]
+
+    return root
+
+
 def is_leaf(node):
     """
     check if node is leaf
