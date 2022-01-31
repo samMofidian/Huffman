@@ -21,3 +21,17 @@ class FileHandler:
 
         # return encoded text
         return encode(text, codes)
+
+    @staticmethod
+    def __decode(text, chars_dict):
+        """
+        encoding file content -- use in decompress func
+        :param text:
+        :param chars_dict:
+        :return:
+        """
+        # create tree from chars_dict
+        tree = huffman_tree(chars_dict)
+
+        # return decoded text
+        return decode(text, tree)
