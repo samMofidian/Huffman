@@ -3,6 +3,18 @@ from functions import *
 
 class FileHandler:
 
+    def compress(self, filename):
+        """
+        receive file-name, compress the txt file content and create txt file named compressed-{filename}
+        :param filename:
+        :return:
+        """
+        with open(f'./files/{filename}.txt', 'r') as f1:
+            plain_content = f1.read()
+            encoded = self.__encode(plain_content)
+            with open(f'./files/compressed-{filename}.txt', 'w') as f2:
+                f2.write(encoded)
+
     @staticmethod
     def __encode(text):
         """
