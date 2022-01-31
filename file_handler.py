@@ -3,6 +3,20 @@ from functions import *
 
 class FileHandler:
 
+    # <use in __new__> create only one object others are the same(one and only address)
+    instance = None
+
+    @classmethod
+    def __new__(cls, *args, **kwargs):
+        """
+        singleton -> only one object from FileHandler class
+        :param args:
+        :param kwargs:
+        """
+        if cls.instance is None:
+            cls.instance = super().__new__(*args, **kwargs)
+        return cls.instance
+
     def compress(self, filename):
         """
         receive file-name, compress the txt file content and create txt file named compressed-{filename}
