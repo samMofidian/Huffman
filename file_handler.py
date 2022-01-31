@@ -15,6 +15,19 @@ class FileHandler:
             with open(f'./files/compressed-{filename}.txt', 'w') as f2:
                 f2.write(encoded)
 
+    def decompress(self, filename, chars_dict):
+        """
+        receive chars-dict and file-name, decompress the txt file content and create txt file named decompressed-{filename}
+        :param filename:
+        :param chars_dict:
+        :return:
+        """
+        with open(f'./files/{filename}.txt', 'r') as f1:
+            cipher_content = f1.read()
+            decoded = self.__decode(cipher_content, chars_dict)
+            with open(f'./files/decompressed-{filename}.txt', 'w') as f2:
+                f2.write(decoded)
+
     @staticmethod
     def __encode(text):
         """
