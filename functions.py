@@ -50,6 +50,40 @@ def chars_counts_2d_list(text):
     return chars_counts_list
 
 
+def create_nodes_list(chars_counts):
+    """
+    receive chars_counts and check if it's list or dictionary create proper nodes-list from it
+    :param chars_counts:
+    :return: nodes-list
+    """
+    # init nodes list
+    nodes_list = []
+
+    # chars_counts type is list
+    if isinstance(chars_counts, list):
+        # create chars-list
+        chars_list = [i for i in chars_counts[0]]
+
+        # create count-list
+        counts_list = [i for i in chars_counts[1]]
+
+        # add node to nodes_list (from 2d-list)
+        for i in range(len(chars_list)):
+            # make node for each char
+            char_node = Node(data=chars_list[i], count=counts_list[i])
+            nodes_list.append(char_node)
+
+    # chars_counts type is dict
+    elif isinstance(chars_counts, dict):
+        # add node to nodes_list (from dictionary)
+        for char in chars_counts:
+            # make node for each char
+            char_node = Node(data=char, count=chars_counts[char])
+            nodes_list.append(char_node)
+
+    return nodes_list
+
+
 def huffman_tree(text):
     """
     create huffman tree
@@ -59,14 +93,8 @@ def huffman_tree(text):
     # make dictionary
     chars_dict = chars_count_dict(text)
 
-    # init nodes list
-    nodes_list = []
-
-    # add node to nodes_list
-    for char in chars_dict:
-        # make node for each char
-        char_node = Node(data=char, count=chars_dict[char])
-        nodes_list.append(char_node)
+    # make nodes list
+    nodes_list = create_nodes_list(chars_dict)
 
     # do while there is at least 2 elements in list
     while len(nodes_list) >= 2:
@@ -101,20 +129,8 @@ def huffman_tree_using_list(chars_counts_list):
     :param chars_counts_list:
     :return: tree root
     """
-    # init nodes list
-    nodes_list = []
-
-    # create chars-list
-    chars_list = [i for i in chars_counts_list[0]]
-
-    # create count-list
-    counts_list = [i for i in chars_counts_list[1]]
-
-    # add node to nodes_list (from 2d-list)
-    for i in range(len(chars_list)):
-        # make node for each char
-        char_node = Node(data=chars_list[i], count=counts_list[i])
-        nodes_list.append(char_node)
+    # make nodes list
+    nodes_list = create_nodes_list(chars_counts_list)
 
     # do while there is at least 2 elements in list
     while len(nodes_list) >= 2:
